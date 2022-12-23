@@ -10,8 +10,6 @@ from visidata import (  # ColumnAttr,; options,
     vd,
 )
 
-# vd.option('csv_lineterminator', '\r\n', 'lineterminator passed to csv.writer', replay=True)
-
 
 @VisiData.api
 def open_tm1log(vd, p):
@@ -64,15 +62,16 @@ class TM1LogRow(TableSheet):
             self.old_s = row[5]
             self.new_s = row[6]
 
-        self.el_1 = row[8]
-        self.el_2 = row[9]
+        self.elements = row[8:]
+
+        self.el_count = len(self.elements)
 
 
 class TM1LogSheet(TableSheet):
 
     rowtype = "changes"  # rowdef: list
 
-    # create
+    # create fixed columns
 
     columns = [
         Column("Time", type=str, width=21, getter=lambda col, row: row.time),  # how to date format this?
@@ -84,8 +83,8 @@ class TM1LogSheet(TableSheet):
         Column("Old Val S", width=14, type=str, getter=lambda col, row: row.old_s),
         Column("New Val S", width=14, type=str, getter=lambda col, row: row.new_s),
         # we'll always have at least two elements in a cube
-        Column("El 1", width=14, type=str, getter=lambda col, row: row.el_1),
-        Column("El 2", width=14, type=str, getter=lambda col, row: row.el_2),
+        Column("El 1", width=14, type=str, getter=lambda col, row: row.elements[0]),
+        Column("El 2", width=14, type=str, getter=lambda col, row: row.elements[1]),
         # need to add the further columns
     ]
 
@@ -96,21 +95,12 @@ class TM1LogSheet(TableSheet):
             # the log lines are comma delimited and double quoted
             rdr = csv.reader(remove_metadata_lines(fp))
 
-            # we always have at least 2 elements in any cube
-            # increment this as we find more
-            el_start = 8
-            el_cols = 2
-
             while True:
                 try:
 
                     row = next(rdr)
 
-                    # set max el count
-                    el_cols_row = len(row[el_start:]) + 1
-
-                    el_cols = max(el_cols, el_cols_row)
-
+                    # do I need to do anything here to add new columns?
                     yield TM1LogRow(row)
 
                 except csv.Error as e:
