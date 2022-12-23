@@ -1,8 +1,8 @@
 import csv
-import datetime
 
 from visidata import (  # ColumnAttr,; options,
     Column,
+    ItemColumn,
     TableSheet,
     TypedExceptionWrapper,
     VisiData,
@@ -29,44 +29,6 @@ def remove_metadata_lines(fp):
             yield line
 
 
-class TM1LogRow(TableSheet):
-    def __init__(self, row):
-
-        # must be a better way...
-        self.time = datetime.datetime(
-            year=int(row[2][:4]),
-            month=int(row[2][4:6]),
-            day=int(row[2][6:8]),
-            hour=int(row[2][8:10]),
-            minute=int(row[2][10:12]),
-            second=int(row[2][12:14]),
-        )
-
-        self.cube = row[7]
-        self.user = row[3]
-        self.type = row[4]
-
-        # I'm in two minds about splitting string and numeric values into separate columns
-        # on one hand, it's a bit noisey, but on the other hand, it's nice to be able to treat numbers as numbers
-        # It might nice to be have an option to only include one or the other
-        self.old_n = None
-        self.old_s = None
-        self.new_n = None
-        self.new_s = None
-
-        # it would be nice to be able to suppress completely null columns
-        if self.type == "N":
-            self.old_n = float(row[5])
-            self.new_n = float(row[6])
-        else:
-            self.old_s = row[5]
-            self.new_s = row[6]
-
-        self.elements = row[8:]
-
-        self.el_count = len(self.elements)
-
-
 class TM1LogSheet(TableSheet):
 
     rowtype = "changes"  # rowdef: list
@@ -74,18 +36,18 @@ class TM1LogSheet(TableSheet):
     # create fixed columns
 
     columns = [
-        Column("Time", type=str, width=21, getter=lambda col, row: row.time),  # how to date format this?
-        Column("Cube", type=str, width=30, getter=lambda col, row: row.cube),
-        Column("User", type=str, width=20, getter=lambda col, row: row.user),
-        Column("T", type=str, width=3, getter=lambda col, row: row.type),
-        Column("Old Val N", width=14, type=float, getter=lambda col, row: row.old_n),
-        Column("New Val N", width=14, type=float, getter=lambda col, row: row.new_n),
-        Column("Old Val S", width=14, type=str, getter=lambda col, row: row.old_s),
-        Column("New Val S", width=14, type=str, getter=lambda col, row: row.new_s),
-        # we'll always have at least two elements in a cube
-        Column("El 1", width=14, type=str, getter=lambda col, row: row.elements[0]),
-        Column("El 2", width=14, type=str, getter=lambda col, row: row.elements[1]),
-        # need to add the further columns
+        # worry about formatting later
+        ItemColumn("Time", 1),
+        ItemColumn("Cube", 7),
+        ItemColumn("User", 3),
+        ItemColumn("T", 4),
+        Column("Old Val N", getter=lambda col, row: row[5] if row[4] == "N" else None),
+        Column("New Val N", getter=lambda col, row: row[6] if row[4] == "N" else None),
+        Column("Old Val S", getter=lambda col, row: row[5] if row[4] == "S" else None),
+        Column("New Val S", getter=lambda col, row: row[6] if row[4] == "S" else None),
+        # # we'll always have at least two elements in a cube
+        ItemColumn("El 1", 8),
+        ItemColumn("El 2", 9),
     ]
 
     def iterload(self):
@@ -101,7 +63,7 @@ class TM1LogSheet(TableSheet):
                     row = next(rdr)
 
                     # do I need to do anything here to add new columns?
-                    yield TM1LogRow(row)
+                    yield row
 
                 except csv.Error as e:
                     e.stacktrace = stacktrace()
