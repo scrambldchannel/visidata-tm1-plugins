@@ -1,0 +1,48 @@
+[build-system]
+requires = ["flit_core>=3.2"]
+build-backend = "flit_core.buildapi"
+
+[project]
+name = "vdtm1"
+authors = [
+  { name="Alexander Sutcliffe", email="sutcliffe.alex@gmail.com" },
+]
+dynamic = ["version", "description"]
+
+dependencies = [
+]
+readme = "README.rst"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/scrambldchannel/visidata-tm1-plugins"
+"Bug Tracker" = "https://github.com/scrambldchannel/]"
+
+
+[tool.black]
+line-length = 120
+target-version = ["py39"]
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.mypy_cache
+    | _build
+    | buck-out
+    | build
+    | dist
+  )
+)
+'''
+
+[tool.isort]
+profile = "black"

@@ -2,4 +2,3 @@
 
 
 sample_file = "tests/sample.log"
-
