@@ -57,10 +57,23 @@ class TM1LogSheet(TableSheet):
             # the log lines are comma delimited and double quoted
             rdr = csv.reader(remove_metadata_lines(fp))
 
+            el_offset = 8
+            el_count = 2
+
             while True:
                 try:
 
                     row = next(rdr)
+
+                    row_el_cols = len(row) - el_offset
+
+                    if row_el_cols > el_count:
+
+                        el_count = row_el_cols
+
+                        col = (Column("El 3", type=str, getter=lambda col, row: "ADS"),)
+
+                        self.addColumn(col)
 
                     # do I need to do anything here to add new columns?
                     yield row
