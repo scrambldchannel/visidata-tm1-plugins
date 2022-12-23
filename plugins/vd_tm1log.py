@@ -1,4 +1,4 @@
-mport csv
+import csv
 
 from visidata import vd, VisiData, TableSheet, options, stacktrace, Column, ColumnAttr
 from visidata import TypedExceptionWrapper
