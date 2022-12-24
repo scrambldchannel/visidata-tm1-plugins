@@ -59,10 +59,11 @@ class TM1LogSheet(TableSheet):
         ItemColumn("Cube", 7),
         ItemColumn("User", 3),
         ItemColumn("T", 4),
-        Column("Old Val N", type=float, getter=lambda col, row: row[5] if row[4] == "N" else None),
-        Column("New Val N", type=float, getter=lambda col, row: row[6] if row[4] == "N" else None),
-        Column("Old Val S", type=str, getter=lambda col, row: row[5] if row[4] == "S" else None),
-        Column("New Val S", type=str, getter=lambda col, row: row[6] if row[4] == "S" else None),
+        # set these to hidden and unhide when a non null value received somehow
+        Column("Old Val N", width=0, type=float, getter=lambda col, row: row[5] if row[4] == "N" else None),
+        Column("New Val N", width=0, type=float, getter=lambda col, row: row[6] if row[4] == "N" else None),
+        Column("Old Val S", width=0, type=str, getter=lambda col, row: row[5] if row[4] == "S" else None),
+        Column("New Val S", width=0, type=str, getter=lambda col, row: row[6] if row[4] == "S" else None),
         # # we'll always have at least two elements in a cube
         Column("El Cnt", type=int, getter=lambda col, row: len(row) - 9),
         ItemColumn("El 1", 8),
@@ -77,6 +78,9 @@ class TM1LogSheet(TableSheet):
             rdr = csv.reader(remove_metadata_lines(fp))
 
             el_count = 2
+
+            has_n = False
+            has_s = False
 
             while True:
                 try:
@@ -119,6 +123,16 @@ class TM1LogSheet(TableSheet):
                         col = ItemColumn(f"El {el_count}", el_count + 7)
 
                         self.addColumn(col)
+
+                    # unhide value columns once type hit
+
+                    if not has_n and row[4] == "N":
+                        self.columns[4].width = 8
+                        self.columns[5].width = 8
+
+                    if not has_s and row[4] == "S":
+                        self.columns[6].width = 8
+                        self.columns[7].width = 8
 
                     # do I need to do anything here to add new columns?
                     yield row
