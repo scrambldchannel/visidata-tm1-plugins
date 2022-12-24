@@ -65,13 +65,16 @@ class TM1LogSheet(TableSheet):
 
                     row = next(rdr)
 
-                    row_el_cols = len(row) - el_offset
+                    # I think each log line has a trailing empty string, not sure though
+                    row_el_cols = len(row) - el_offset - 1
 
-                    if row_el_cols > el_count:
+                    while el_count < row_el_cols:
 
-                        el_count = row_el_cols
+                        # we need to add all new columns
 
-                        col = (Column("El 3", type=str, getter=lambda col, row: "ADS"),)
+                        el_count = el_count + 1
+
+                        col = ItemColumn(f"El {el_count}", el_offset + el_count)
 
                         self.addColumn(col)
 
