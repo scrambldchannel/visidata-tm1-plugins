@@ -10,6 +10,11 @@ from visidata import (  # ColumnAttr,; options,
     vd,
 )
 
+# options for filtering the results
+vd.option("tm1_ctrl", False, "include control cubes", replay=True)
+vd.option("tm1_cube", "", "include only specific cube", replay=True)
+vd.option("tm1_user", "", "include only specific user", replay=True)
+
 
 @VisiData.api
 def open_tm1log(vd, p):
@@ -21,9 +26,10 @@ def remove_metadata_lines(fp):
     # there are metadata lines in the file that we want to skip
     # all such lines start with a #, sometimes with a leading space
     # there's a trailing with a single weird char (this can be handled more elegantly surely)
+
     for line in fp:
 
-        if line[0] == "#" or len(line) == 1 or line[1] == "#":
+        if line[0] == "#" or len(line) < 3 or line[1] == "#":
             continue
         else:
             yield line
@@ -34,6 +40,14 @@ class TM1LogSheet(TableSheet):
     rowtype = "changes"  # rowdef: list
 
     non_el_columns = 9
+
+    def __init__(self, name, source, tm1_ctrl=None, tm1_cube=None, tm1_user=None):
+
+        super().__init__(name=name, source=source)
+
+        self.tm1_ctrl = vd.options.tm1_ctrl if tm1_ctrl is None else tm1_ctrl
+        self.tm1_cube = vd.options.tm1_cube if tm1_cube is None else tm1_cube
+        self.tm1_user = vd.options.tm1_user if tm1_user is None else tm1_user
 
     # create fixed columns
 
@@ -67,9 +81,31 @@ class TM1LogSheet(TableSheet):
 
                     row = next(rdr)
 
+                    cube = row[7]
+
+                    # filter for specific cube if asked to
+                    if self.tm1_cube and cube != self.tm1_cube:
+
+                        continue
+
+                    elif not self.tm1_ctrl and cube[0] == "}":
+
+                        # only include control cubes if explicitly requested
+                        # but if a control cube has be chosen as the filter cube
+                        # implicitly they want it included
+
+                        continue
+
+                    # filter for specific user if asked to
+                    user = row[3]
+
+                    if self.tm1_user and user != self.tm1_user:
+
+                        continue
+
+                    # I think each log line has a trailing empty string for some reason
                     row = row[:-1]
 
-                    # I think each log line has a trailing empty string, not sure though
                     row_el_cols = len(row) - 9
 
                     while el_count < row_el_cols:
