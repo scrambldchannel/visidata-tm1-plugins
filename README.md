@@ -31,17 +31,24 @@ vd tm1s20200802093541.log -f tm1log --tm1-ctrl=true
 You can also filter for a specific cube or user:
 
 ```sh
-vd tm1s20200802093541.log -f tm1log --tm1-cube=Sales
+vd tm1s20200802093541.log -f tm1log --tm1-cube=sales
 ```
 
 ```sh
 vd tm1s20200802093541.log -f tm1log --tm1-user=alexander.sutcliffe
 ```
+**Note:** these filters are applied case _insensitively_ to mirror TM1's behaviour.
 
-You can also filter by both:
+You can also choose to only include `N` or `S` values:
 
 ```sh
-vd tm1s20200802093541.log -f tm1log --tm1-user=alexander.sutcliffe --tm1-cube=Sales
+vd tm1s20200802093541.log -f tm1log --tm1-dt=n
+```
+
+You can also combine filters:
+
+```sh
+vd tm1s20200802093541.log -f tm1log --tm1-user=alexander.sutcliffe --tm1-cube=sales
 ```
 
 Happy log hunting!
