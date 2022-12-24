@@ -62,7 +62,7 @@ class TM1LogSheet(TableSheet):
         Column("Old Val S", type=str, getter=lambda col, row: row[5] if row[4] == "S" else None),
         Column("New Val S", type=str, getter=lambda col, row: row[6] if row[4] == "S" else None),
         # # we'll always have at least two elements in a cube
-        Column("El Cnt", type=int, getter=lambda col, row: len(row) - 8),
+        Column("El Cnt", type=int, getter=lambda col, row: len(row) - 9),
         ItemColumn("El 1", 8),
         ItemColumn("El 2", 9),
     ]
@@ -104,7 +104,7 @@ class TM1LogSheet(TableSheet):
                         continue
 
                     # I think each log line has a trailing empty string for some reason
-                    row = row[:-1]
+                    # row = row[:-1]
 
                     row_el_cols = len(row) - 9
 
