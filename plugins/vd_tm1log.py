@@ -17,9 +17,6 @@ vd.option("tm1_cube", "", "include only specific cube", replay=True)
 vd.option("tm1_user", "", "include only specific user", replay=True)
 vd.option("tm1_dt", "", "include only specific datatype (N or S)", replay=True)
 
-# hacking the date format, not sure this the best place...
-vd.option("disp_date_fmt", "%Y-%m-%d %H:%M:%S", "default fmtstr to strftime for date values", replay=True)
-
 
 @VisiData.api
 def open_tm1log(vd, p):
@@ -157,6 +154,7 @@ class TM1LogSheet(TableSheet):
 
 
 # not sure where this should be done / or whether there's a better way to achieve this
-TM1LogSheet.class_options.header = 0
+TM1LogSheet.class_options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"
+
 
 vd.addGlobals({"TM1LogSheet": TM1LogSheet})
