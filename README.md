@@ -1,11 +1,14 @@
 # TM1 Transaction Log plugin for Visidata
 
-Currently a work in progress
+Explore tm1 transaction logs with [Visidata](https://visidata.org).
 
 ## Install/Test
 
-Copy `vd_tm1log.py` from the repo to ~/.visidata/plugins
+Copy `vd_tm1log.py` from the repo to 1 `/.visidata/plugins`
+
 Add `import plugins.vd_tm1log` to `~/.visidatarc`
+
+Generic instructions for installing plugins can be found [here](https://www.visidata.org/docs/plugins/).
 
 Open a tm1 transaction log file with:
 
