@@ -6,6 +6,7 @@ from visidata import (  # ColumnAttr,; options,
     TableSheet,
     TypedExceptionWrapper,
     VisiData,
+    date,
     stacktrace,
     vd,
 )
@@ -14,6 +15,8 @@ from visidata import (  # ColumnAttr,; options,
 vd.option("tm1_ctrl", False, "include control cubes", replay=True)
 vd.option("tm1_cube", "", "include only specific cube", replay=True)
 vd.option("tm1_user", "", "include only specific user", replay=True)
+# hacking the date format, not sure this the best place...
+vd.option("disp_date_fmt", "%Y-%m-%d %H:%M:%S", "default fmtstr to strftime for date values", replay=True)
 
 
 @VisiData.api
@@ -52,8 +55,7 @@ class TM1LogSheet(TableSheet):
     # create fixed columns
 
     columns = [
-        # worry about formatting later
-        ItemColumn("Time", 1),
+        Column("Time", width=18, type=date, getter=lambda col, row: row[1]),
         ItemColumn("Cube", 7),
         ItemColumn("User", 3),
         ItemColumn("T", 4),
