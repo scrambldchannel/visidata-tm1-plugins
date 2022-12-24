@@ -60,7 +60,7 @@ class TM1LogSheet(TableSheet):
         ItemColumn("User", 3),
         ItemColumn("T", 4),
         # # we'll always have at least two elements in a cube
-        Column("El Cnt", type=int, getter=lambda col, row: len(row) - 9),
+        Column("El Cnt", type=int, getter=lambda col, row: len(row) - 8),
         ItemColumn("El 1", 8),
         ItemColumn("El 2", 9),
         # set these to hidden and unhide when a non null value received somehow
@@ -87,9 +87,12 @@ class TM1LogSheet(TableSheet):
 
                     row = next(rdr)
 
-                    cube = row[7]
+                    # each log row seems to contain an empty string at the end
+                    row = row[:-1]
 
                     # filter for specific cube if asked to
+                    cube = row[7]
+
                     if self.tm1_cube and cube.lower() != self.tm1_cube:
 
                         continue
@@ -119,7 +122,7 @@ class TM1LogSheet(TableSheet):
                     # I think each log line has a trailing empty string for some reason
                     # row = row[:-1]
 
-                    row_el_cols = len(row) - 9
+                    row_el_cols = len(row) - 8
 
                     while el_count < row_el_cols:
 
