@@ -15,6 +15,8 @@ from visidata import (  # ColumnAttr,; options,
 vd.option("tm1_ctrl", False, "include control cubes", replay=True)
 vd.option("tm1_cube", "", "include only specific cube", replay=True)
 vd.option("tm1_user", "", "include only specific user", replay=True)
+vd.option("tm1_dt", "", "include only specific datatype (N or S)", replay=True)
+
 # hacking the date format, not sure this the best place...
 vd.option("disp_date_fmt", "%Y-%m-%d %H:%M:%S", "default fmtstr to strftime for date values", replay=True)
 
@@ -44,13 +46,14 @@ class TM1LogSheet(TableSheet):
 
     non_el_columns = 9
 
-    def __init__(self, name, source, tm1_ctrl=None, tm1_cube=None, tm1_user=None):
+    def __init__(self, name, source, tm1_ctrl=None, tm1_cube=None, tm1_user=None, tm1_dt=None):
 
         super().__init__(name=name, source=source)
 
         self.tm1_ctrl = vd.options.tm1_ctrl if tm1_ctrl is None else tm1_ctrl
-        self.tm1_cube = vd.options.tm1_cube if tm1_cube is None else tm1_cube
-        self.tm1_user = vd.options.tm1_user if tm1_user is None else tm1_user
+        self.tm1_cube = vd.options.tm1_cube.lower() if tm1_cube is None else tm1_cube
+        self.tm1_user = vd.options.tm1_user.lower() if tm1_user is None else tm1_user
+        self.tm1_dt = vd.options.tm1_dt.lower() if tm1_dt is None else tm1_dt
 
     # create fixed columns
 
@@ -90,7 +93,7 @@ class TM1LogSheet(TableSheet):
                     cube = row[7]
 
                     # filter for specific cube if asked to
-                    if self.tm1_cube and cube != self.tm1_cube:
+                    if self.tm1_cube and cube.lower() != self.tm1_cube:
 
                         continue
 
@@ -105,7 +108,14 @@ class TM1LogSheet(TableSheet):
                     # filter for specific user if asked to
                     user = row[3]
 
-                    if self.tm1_user and user != self.tm1_user:
+                    if self.tm1_user and user.lower() != self.tm1_user:
+
+                        continue
+
+                    # filter just for strings or numbers
+                    datatype = row[4]
+
+                    if self.tm1_dt and datatype.lower() != self.tm1_dt:
 
                         continue
 
@@ -126,11 +136,11 @@ class TM1LogSheet(TableSheet):
 
                     # unhide value columns once type hit
 
-                    if not has_n and row[4] == "N":
+                    if not has_n and datatype == "N":
                         self.columns[4].width = 8
                         self.columns[5].width = 8
 
-                    if not has_s and row[4] == "S":
+                    if not has_s and datatype == "S":
                         self.columns[6].width = 8
                         self.columns[7].width = 8
 
