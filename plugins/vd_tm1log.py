@@ -33,6 +33,8 @@ class TM1LogSheet(TableSheet):
 
     rowtype = "changes"  # rowdef: list
 
+    non_el_columns = 9
+
     # create fixed columns
 
     columns = [
@@ -46,6 +48,7 @@ class TM1LogSheet(TableSheet):
         Column("Old Val S", type=str, getter=lambda col, row: row[5] if row[4] == "S" else None),
         Column("New Val S", type=str, getter=lambda col, row: row[6] if row[4] == "S" else None),
         # # we'll always have at least two elements in a cube
+        Column("El Cnt", type=int, getter=lambda col, row: len(row) - 8),
         ItemColumn("El 1", 8),
         ItemColumn("El 2", 9),
     ]
@@ -57,7 +60,6 @@ class TM1LogSheet(TableSheet):
             # the log lines are comma delimited and double quoted
             rdr = csv.reader(remove_metadata_lines(fp))
 
-            el_offset = 8
             el_count = 2
 
             while True:
@@ -65,8 +67,10 @@ class TM1LogSheet(TableSheet):
 
                     row = next(rdr)
 
+                    row = row[:-1]
+
                     # I think each log line has a trailing empty string, not sure though
-                    row_el_cols = len(row) - el_offset - 1
+                    row_el_cols = len(row) - 9
 
                     while el_count < row_el_cols:
 
@@ -74,7 +78,7 @@ class TM1LogSheet(TableSheet):
 
                         el_count = el_count + 1
 
-                        col = ItemColumn(f"El {el_count}", el_offset + el_count)
+                        col = ItemColumn(f"El {el_count}", el_count + 7)
 
                         self.addColumn(col)
 
