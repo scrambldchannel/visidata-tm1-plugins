@@ -2,6 +2,8 @@
 
 Explore tm1 transaction logs with [Visidata](https://visidata.org).
 
+![ScreenShot](screenshot.png)
+
 ## Installation
 
 Copy `vd_tm1log.py` from the repo to 1 `/.visidata/plugins`
