@@ -123,3 +123,4 @@ dmypy.json
 
 tests/home/Library
 tests/home/.z
+tests/sample.log
