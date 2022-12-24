@@ -55,7 +55,7 @@ class TM1LogSheet(TableSheet):
     # create fixed columns
 
     columns = [
-        Column("Time", width=18, type=date, getter=lambda col, row: row[1]),
+        Column("Time", type=date, getter=lambda col, row: row[1]),
         ItemColumn("Cube", 7),
         ItemColumn("User", 3),
         ItemColumn("T", 4),
