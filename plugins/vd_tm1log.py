@@ -31,7 +31,7 @@ def remove_metadata_lines(fp):
 
     for line in fp:
 
-        if line[0] == "#" or len(line) < 3 or line[1] == "#":
+        if line[0] == "#" or line[1] == "#" or len(line) < 3:
             continue
         else:
             yield line
@@ -66,6 +66,18 @@ class TM1LogSheet(TableSheet):
         # set these to hidden and unhide when a non null value received somehow
         Column("Old Val N", width=0, type=float, getter=lambda col, row: row[5] if row[4] == "N" else None),
         Column("New Val N", width=0, type=float, getter=lambda col, row: row[6] if row[4] == "N" else None),
+        Column(
+            "Delta",
+            width=0,
+            type=float,
+            getter=lambda col, row: (float(row[6]) - float(row[5])) if row[4] == "N" else None,
+        ),
+        Column(
+            "Delta",
+            width=0,
+            type=float,
+            getter=lambda col, row: abs(float(row[6]) - float(row[5])) if row[4] == "N" else None,
+        ),
         Column("Old Val S", width=0, type=str, getter=lambda col, row: row[5] if row[4] == "S" else None),
         Column("New Val S", width=0, type=str, getter=lambda col, row: row[6] if row[4] == "S" else None),
     ]
@@ -81,6 +93,9 @@ class TM1LogSheet(TableSheet):
 
             has_n = False
             has_s = False
+
+            # not sure this is the best place to do this but it works
+            self.setKeys(self.columns[0:3])
 
             while True:
                 try:
@@ -139,6 +154,8 @@ class TM1LogSheet(TableSheet):
                     # unhide value columns once type hit
 
                     if not has_n and datatype == "N":
+                        self.columns[-6].width = 8
+                        self.columns[-5].width = 8
                         self.columns[-4].width = 8
                         self.columns[-3].width = 8
 
