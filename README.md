@@ -2,8 +2,6 @@
 
 Explore tm1 transaction logs with [Visidata](https://visidata.org).
 
-![ScreenShot](screenshot.png)
-
 ## Installation
 
 Copy `vd_tm1log.py` from the repo to 1 `/.visidata/plugins`
@@ -19,6 +17,22 @@ Open a tm1 transaction log file with:
 ```sh
 vd tm1s20200802093541.log -f tm1log
 ```
+
+This will parse the log file and show the cube changes in a custom Visidata sheet.
+
+![ScreenShot](screenshot.png)
+
+You then get all the power of Visidata at your fingertips.
+
+E.g:
+
+* Sort columns (Cubes, values, elements etc) with `[` and `]`
+* Select all rows matching where the value in the col matches the current selected cell with `,`
+* Open all selected rows in a new sheet with `"` to help you zero in on a specific change
+
+And much more, see the [Visidata cheat sheet](https://jsvine.github.io/visidata-cheat-sheet/en/).
+
+
 
 ## Options for Filtering
 
