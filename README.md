@@ -18,7 +18,19 @@ Open a tm1 transaction log file with:
 vd tm1s20200802093541.log -f tm1log
 ```
 
-This will parse the log file and show the cube changes in a custom Visidata sheet.
+Or open multiple logs at once:
+
+```sh
+vd tm1s20200802093541.log tm1s202009026084529.log -f tm1log
+```
+
+```sh
+vd tm1s202012*.log -f tm1log
+```
+
+
+This will parse the log file(s) and show the cube changes in a custom Visidata sheet.
+
 
 ![ScreenShot](screenshot.png)
 
