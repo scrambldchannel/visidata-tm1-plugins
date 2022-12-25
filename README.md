@@ -4,7 +4,7 @@ Explore tm1 transaction logs with [Visidata](https://visidata.org).
 
 ## Installation
 
-Copy `vd_tm1log.py` from the repo to 1 `/.visidata/plugins`
+Copy `vd_tm1log.py` from the repo to 1 `~/.visidata/plugins`
 
 Add `import plugins.vd_tm1log` to `~/.visidatarc`
 
@@ -27,6 +27,7 @@ You then get all the power of Visidata at your fingertips.
 E.g:
 
 * Sort columns (Cubes, values, elements etc) with `[` and `]`
+* Hide columns you're not interested in with `-`
 * Select all rows matching where the value in the col matches the current selected cell with `,`
 * Open all selected rows in a new sheet with `"` to help you zero in on a specific change
 
