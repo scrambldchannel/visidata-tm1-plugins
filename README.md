@@ -53,6 +53,9 @@ And much more, see the [Visidata cheat sheet](https://jsvine.github.io/visidata-
 
 These log files can often be huge but if you know what you're looking for, you can asynchronously sift through a huge number of rows by selecting only the records you want.
 
+**Note:** string filters (e.g. cube and user) are applied case insensitively to mirror tm1's behaviour.
+
+
 ### Control Cubes
 
 By default, control cubes are suppressed. You can include them with the `tm1-ctrl` option:
@@ -61,9 +64,9 @@ By default, control cubes are suppressed. You can include them with the `tm1-ctr
 vd tm1s20200802093541.log -f tm1log --tm1-ctrl=true
 ```
 
-### Filtering at Load Time
+### Filtering by Cube
 
-You can also filter for a specific cub:
+Filter for a specific cube with `tm1-cube` option:
 
 ```sh
 vd tm1s20200802093541.log -f tm1log --tm1-cube=sales
@@ -71,11 +74,13 @@ vd tm1s20200802093541.log -f tm1log --tm1-cube=sales
 
 Filtering by a specific cube implies `tm1-ctrl` allowing you to search for a specific attribute cube etc.
 
+### Filtering by User
+
+Filter for a specific user with `tm1-user` option:
+
 ```sh
 vd tm1s20200802093541.log -f tm1log --tm1-user=alexander.sutcliffe
 ```
-
-These filters are applied case _insensitively_ to mirror TM1's behaviour.
 
 ### Filtering by datatype
 
