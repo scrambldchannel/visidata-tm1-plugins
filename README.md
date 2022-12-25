@@ -30,7 +30,7 @@ Or a range, e.g. December 2020:
 vd tm1s202012*.log -f tm1log
 ```
 
-This will parse the log file(s) and show the cube changes in a custom Visidata sheet.
+This will parse the log file(s) and show the cube changes in a custom Visidata sheet for each file.
 
 
 ![ScreenShot](screenshot.png)
