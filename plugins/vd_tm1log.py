@@ -12,10 +12,11 @@ from visidata import (  # ColumnAttr,; options,
 )
 
 # options for filtering the results
+vd.option("tm1_cube", "", "include only specific cube (implies tm1_ctrl)", replay=True)
 vd.option("tm1_ctrl", False, "include control cubes", replay=True)
-vd.option("tm1_cube", "", "include only specific cube", replay=True)
 vd.option("tm1_user", "", "include only specific user", replay=True)
 vd.option("tm1_dt", "", "include only specific datatype (N or S)", replay=True)
+vd.option("tm1_deltas", True, "include delta columns for numeric values", replay=True)
 
 
 @VisiData.api
@@ -39,18 +40,23 @@ def remove_metadata_lines(fp):
 
 class TM1LogSheet(TableSheet):
 
-    rowtype = "changes"  # rowdef: list
+    rowtype = "cube changes"  # rowdef: list
 
     non_el_columns = 9
 
-    def __init__(self, name, source, tm1_ctrl=None, tm1_cube=None, tm1_user=None, tm1_dt=None):
+    def __init__(self, name, source, tm1_ctrl=None, tm1_cube=None, tm1_user=None, tm1_dt=None, tm1_deltas=None):
 
         super().__init__(name=name, source=source)
 
-        self.tm1_ctrl = vd.options.tm1_ctrl if tm1_ctrl is None else tm1_ctrl
         self.tm1_cube = vd.options.tm1_cube.lower() if tm1_cube is None else tm1_cube
+        # filtering for a specific cube implies show control
+        if self.tm1_cube:
+            self.tm1_ctrl = True
+        else:
+            self.tm1_ctrl = vd.options.tm1_ctrl if tm1_ctrl is None else tm1_ctrl
         self.tm1_user = vd.options.tm1_user.lower() if tm1_user is None else tm1_user
         self.tm1_dt = vd.options.tm1_dt.lower() if tm1_dt is None else tm1_dt
+        self.tm1_deltas = vd.options.tm1_deltas if tm1_deltas is None else tm1_deltas
 
     # create fixed columns
 
@@ -73,7 +79,7 @@ class TM1LogSheet(TableSheet):
             getter=lambda col, row: (float(row[6]) - float(row[5])) if row[4] == "N" else None,
         ),
         Column(
-            "Delta",
+            "Abs Delta",
             width=0,
             type=float,
             getter=lambda col, row: abs(float(row[6]) - float(row[5])) if row[4] == "N" else None,
@@ -112,11 +118,8 @@ class TM1LogSheet(TableSheet):
 
                         continue
 
-                    elif not self.tm1_ctrl and cube[0] == "}":
-
-                        # only include control cubes if explicitly requested
-                        # but if a control cube has be chosen as the filter cube
-                        # implicitly they want it included
+                    # only include ctrl cubes if requested
+                    if not self.tm1_ctrl and cube[0] == "}":
 
                         continue
 
@@ -156,8 +159,9 @@ class TM1LogSheet(TableSheet):
                     if not has_n and datatype == "N":
                         self.columns[-6].width = 8
                         self.columns[-5].width = 8
-                        self.columns[-4].width = 8
-                        self.columns[-3].width = 8
+                        if self.tm1_deltas:
+                            self.columns[-4].width = 8
+                            self.columns[-3].width = 8
 
                     if not has_s and datatype == "S":
                         self.columns[-2].width = 8
