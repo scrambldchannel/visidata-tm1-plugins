@@ -18,6 +18,26 @@ def tm1log_test_sheet():
     return sheet
 
 
+@pytest.fixture
+def tm1log_test_sheet_cube():
+
+    source = "sample_small.log"
+
+    sheet: TM1LogSheet = TM1LogSheet(source=source, name="test_tm1log_sheet", tm1_cube="Sales")
+
+    return sheet
+
+
+@pytest.fixture
+def tm1log_test_sheet_user():
+
+    source = "sample_small.log"
+
+    sheet: TM1LogSheet = TM1LogSheet(source=source, name="test_tm1log_sheet", tm1_user="Chimpy")
+
+    return sheet
+
+
 def test_fixed_cols(tm1log_test_sheet):
 
     # basic check on fixed cols
@@ -29,6 +49,24 @@ def test_fixed_cols(tm1log_test_sheet):
 
     assert tm1log_test_sheet.columns[5].name == "El 1"
     assert tm1log_test_sheet.columns[6].name == "El 2"
+
+
+def test_cube_filter(tm1log_test_sheet_cube):
+
+    assert tm1log_test_sheet_cube
+    assert tm1log_test_sheet_cube.tm1_cube == "Sales"
+
+
+def test_user_filter(tm1log_test_sheet_user):
+
+    assert tm1log_test_sheet_user
+    assert tm1log_test_sheet_user.tm1_user == "Chimpy"
+
+
+def test_cube_implies_ctrl(tm1log_test_sheet_cube):
+
+    assert tm1log_test_sheet_cube
+    assert tm1log_test_sheet_cube.tm1_ctrl
 
 
 @pytest.mark.skip("Not yet implemented")
