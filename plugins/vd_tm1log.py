@@ -55,7 +55,7 @@ class TM1LogSheet(TableSheet):
     # create fixed columns
 
     columns = [
-        Column("Time", type=date, getter=lambda col, row: row[1]),
+        Column("Time", type=date, fmtstr="%Y-%m-%d %H:%M:%S", getter=lambda col, row: row[1]),
         ItemColumn("Cube", 7),
         ItemColumn("User", 3),
         ItemColumn("T", 4),
@@ -154,10 +154,6 @@ class TM1LogSheet(TableSheet):
                     yield [TypedExceptionWrapper(None, exception=e)]
                 except StopIteration:
                     return
-
-
-# not sure where this should be done / or whether there's a better way to achieve this
-TM1LogSheet.class_options.disp_date_fmt = "%Y-%m-%d %H:%M:%S"
 
 
 vd.addGlobals({"TM1LogSheet": TM1LogSheet})
