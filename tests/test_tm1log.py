@@ -23,7 +23,7 @@ def tm1log_test_sheet_cube():
 
     source = "sample_small.log"
 
-    sheet: TM1LogSheet = TM1LogSheet(source=source, name="test_tm1log_sheet", tm1_cube="Sales")
+    sheet: TM1LogSheet = TM1LogSheet(source=source, name="test_tm1log_sheet_cube", tm1_cube="Sales")
 
     return sheet
 
@@ -33,7 +33,7 @@ def tm1log_test_sheet_user():
 
     source = "sample_small.log"
 
-    sheet: TM1LogSheet = TM1LogSheet(source=source, name="test_tm1log_sheet", tm1_user="Chimpy")
+    sheet: TM1LogSheet = TM1LogSheet(source=source, name="test_tm1log_sheet_user", tm1_user="Chimpy")
 
     return sheet
 
