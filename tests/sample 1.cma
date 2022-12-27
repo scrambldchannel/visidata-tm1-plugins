@@ -1,0 +1,70 @@
+﻿"24retail:Benefit Assumptions","Y1","Version 1","Medicare",1.46
+"24retail:Benefit Assumptions","Y1","Version 1","FICA",6
+"24retail:Benefit Assumptions","Y1","Version 1","FICA Limit",106800
+"24retail:Benefit Assumptions","Y1","Version 1","Medical",24
+"24retail:Benefit Assumptions","Y1","Version 1","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y1","Version 2","Medicare",1
+"24retail:Benefit Assumptions","Y1","Version 2","FICA",6
+"24retail:Benefit Assumptions","Y1","Version 2","FICA Limit",106800
+"24retail:Benefit Assumptions","Y1","Version 2","Medical",250
+"24retail:Benefit Assumptions","Y1","Version 2","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y1","Actual","Medicare",1.46
+"24retail:Benefit Assumptions","Y1","Actual","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y1","Actual","FICA Limit",106800
+"24retail:Benefit Assumptions","Y1","Actual","Medical",250
+"24retail:Benefit Assumptions","Y1","Actual","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y1","Forecast","Medicare",1
+"24retail:Benefit Assumptions","Y1","Forecast","FICA",6
+"24retail:Benefit Assumptions","Y1","Forecast","FICA Limit",106800
+"24retail:Benefit Assumptions","Y1","Forecast","Medical",250
+"24retail:Benefit Assumptions","Y1","Forecast","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y1","Target","Medicare",1.46
+"24retail:Benefit Assumptions","Y1","Target","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y1","Target","FICA Limit",106800
+"24retail:Benefit Assumptions","Y1","Target","Medical",250
+"24retail:Benefit Assumptions","Y1","Target","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y1","Predictive","Medicare",1.46
+"24retail:Benefit Assumptions","Y1","Predictive","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y1","Predictive","FICA Limit",106800
+"24retail:Benefit Assumptions","Y1","Predictive","Medical",250
+"24retail:Benefit Assumptions","Y1","Predictive","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y2","Version 1","Medicare",1.46
+"24retail:Benefit Assumptions","Y2","Version 1","FICA",10
+"24retail:Benefit Assumptions","Y2","Version 1","FICA Limit",106800
+"24retail:Benefit Assumptions","Y2","Version 1","Medical",250
+"24retail:Benefit Assumptions","Y2","Version 1","Other Benefits Rate",10
+"24retail:Benefit Assumptions","Y2","Actual","Medicare",1.46
+"24retail:Benefit Assumptions","Y2","Actual","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y2","Actual","FICA Limit",106800
+"24retail:Benefit Assumptions","Y2","Actual","Medical",250
+"24retail:Benefit Assumptions","Y2","Actual","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y2","Target","Medicare",1.46
+"24retail:Benefit Assumptions","Y2","Target","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y2","Target","FICA Limit",106800
+"24retail:Benefit Assumptions","Y2","Target","Medical",250
+"24retail:Benefit Assumptions","Y2","Target","Other Benefits Rate",10
+"24retail:Benefit Assumptions","Y2","Predictive","Medicare",1.46
+"24retail:Benefit Assumptions","Y2","Predictive","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y2","Predictive","FICA Limit",106800
+"24retail:Benefit Assumptions","Y2","Predictive","Medical",250
+"24retail:Benefit Assumptions","Y2","Predictive","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y3","Version 1","Medicare",1.46
+"24retail:Benefit Assumptions","Y3","Version 1","FICA",5
+"24retail:Benefit Assumptions","Y3","Version 1","FICA Limit",106800
+"24retail:Benefit Assumptions","Y3","Version 1","Medical",260
+"24retail:Benefit Assumptions","Y3","Version 1","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y3","Actual","Medicare",1.46
+"24retail:Benefit Assumptions","Y3","Actual","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y3","Actual","FICA Limit",106800
+"24retail:Benefit Assumptions","Y3","Actual","Medical",250
+"24retail:Benefit Assumptions","Y3","Actual","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y3","Target","Medicare",1.46
+"24retail:Benefit Assumptions","Y3","Target","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y3","Target","FICA Limit",106800
+"24retail:Benefit Assumptions","Y3","Target","Medical",250
+"24retail:Benefit Assumptions","Y3","Target","Other Benefits Rate",12
+"24retail:Benefit Assumptions","Y3","Predictive","Medicare",1.46
+"24retail:Benefit Assumptions","Y3","Predictive","FICA",6.2000000000000002
+"24retail:Benefit Assumptions","Y3","Predictive","FICA Limit",106800
+"24retail:Benefit Assumptions","Y3","Predictive","Medical",250
+"24retail:Benefit Assumptions","Y3","Predictive","Other Benefits Rate",12
