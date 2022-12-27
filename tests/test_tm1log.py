@@ -15,16 +15,21 @@ def sample_log_sheet():
     return load_vd_sheet(SAMPLE_FILE, filetype="tm1log")
 
 
-def test_sheet_basics(sample_log_sheet):
+def test_cols(sample_log_sheet):
 
     assert sample_log_sheet
 
-    print(type(sample_log_sheet))
-
     # we should have all the fixed columns at least
     assert len(sample_log_sheet.columns) >= 13
-    # we should have some rows
-    assert len(sample_log_sheet.rows) > 0
 
     assert sample_log_sheet.columns[0].name == "Time"
     assert sample_log_sheet.columns[1].name == "Cube"
+
+
+def test_rows(sample_log_sheet):
+
+    assert sample_log_sheet
+
+    assert len(sample_log_sheet.rows) > 0
+
+    assert len(sample_log_sheet.rows) == 16
