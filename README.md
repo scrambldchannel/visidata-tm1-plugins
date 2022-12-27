@@ -18,6 +18,8 @@ Open a tm1 transaction log file with:
 vd tm1s20200802093541.log -f tm1log
 ```
 
+[![asciicast](https://asciinema.org/a/548128.svg)](https://asciinema.org/a/548128)
+
 Or open multiple logs at once:
 
 ```sh
@@ -31,9 +33,6 @@ vd tm1s202012*.log -f tm1log
 ```
 
 This will parse the log file(s) and show the cube changes in a custom Visidata sheet for each file.
-
-
-[![asciicast](https://asciinema.org/a/548128.svg)](https://asciinema.org/a/548128)
 
 You then get all the power of Visidata at your fingertips.
 
