@@ -1,0 +1,2 @@
+import plugins.vd_tm1log
+from visidata import vd
