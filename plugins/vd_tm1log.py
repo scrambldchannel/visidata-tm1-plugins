@@ -1,3 +1,7 @@
+"""Analyse TM1 transaction log files"""
+
+__version__ = "0.1"
+
 import csv
 
 from visidata import (  # ColumnAttr,; options,
