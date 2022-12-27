@@ -4,9 +4,6 @@ import pytest
 
 from .common import load_vd_sheet
 
-# from plugins.vd_tm1log import TM1LogSheet  # , remove_metadata_lines
-
-
 SAMPLE_FILE = "tests/sample_log.log"
 
 

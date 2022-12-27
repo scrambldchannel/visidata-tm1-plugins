@@ -4,7 +4,7 @@ __version__ = "0.1"
 
 import csv
 
-from visidata import (  # ColumnAttr,; options,
+from visidata import (
     Column,
     ItemColumn,
     TableSheet,
