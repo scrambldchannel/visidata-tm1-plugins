@@ -33,7 +33,7 @@ vd tm1s202012*.log -f tm1log
 This will parse the log file(s) and show the cube changes in a custom Visidata sheet for each file.
 
 
-![ScreenShot](screenshot.png)
+[![asciicast](https://asciinema.org/a/548128.svg)](https://asciinema.org/a/548128)
 
 You then get all the power of Visidata at your fingertips.
 
