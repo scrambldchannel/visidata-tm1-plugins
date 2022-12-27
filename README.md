@@ -18,7 +18,7 @@ Open a tm1 transaction log file with:
 vd tm1s20200802093541.log -f tm1log
 ```
 
-[![asciicast](https://asciinema.org/a/548128.svg)](https://asciinema.org/a/548128)
+[![asciicast](https://asciinema.org/a/548133.svg)](https://asciinema.org/a/548133)
 
 Or open multiple logs at once:
 
