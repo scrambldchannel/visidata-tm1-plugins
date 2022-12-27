@@ -10,6 +10,10 @@ Add `import plugins.vd_tm1log` to `~/.visidatarc`
 
 Generic instructions for installing plugins can be found [here](https://www.visidata.org/docs/plugins/).
 
+### Windows
+
+I did some basic testing within powershell and it seems to work. I recommend using [wsl](https://learn.microsoft.com/en-us/windows/wsl/install) though.
+
 ## Basic Usage
 
 Open a tm1 transaction log file with:
