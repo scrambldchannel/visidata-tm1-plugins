@@ -36,7 +36,7 @@ def remove_metadata_lines(fp):
 
     for line in fp:
 
-        if line[0] == "#" or line[1] == "#" or len(line) < 3:
+        if line[0] == "#" or len(line) < 3 or line[1] == "#":
             continue
         else:
             yield line
