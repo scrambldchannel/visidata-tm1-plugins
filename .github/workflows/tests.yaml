@@ -38,5 +38,9 @@ jobs:
         run:
           pip install pytest
 
+      - name: install visidata
+        run:
+          pip install visidata
+
       - name: run core tests
         run: pytest -s -v tests
