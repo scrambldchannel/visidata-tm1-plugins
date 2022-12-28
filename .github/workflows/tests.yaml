@@ -3,7 +3,7 @@ name: Tests
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    paths: ["tm1filetools/**/*", "tests/**/*"]
+    paths: ["plugins/**/*", "tests/**/*"]
 
   push:
     branches:
